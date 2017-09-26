@@ -4,6 +4,7 @@ MainWindow::MainWindow(string title, int xRes, int yRes) {
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	m_window = glfwCreateWindow(xRes, yRes, title.c_str(), nullptr, nullptr);
 }
