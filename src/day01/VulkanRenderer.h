@@ -1,9 +1,15 @@
 #pragma once
 #include "Main.h"
+#include "IRenderer.h"
 
-class VulkanRenderer {
+class VulkanRenderer : IRenderer {
 public:
 	void Render();
+
+	string GetName()
+	{
+		return "Vulkan";
+	}
 private:
 	VkInstance instance;
 };
