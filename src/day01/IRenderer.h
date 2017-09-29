@@ -7,4 +7,5 @@ class IRenderer
 public:
 	virtual ~IRenderer() = default;
 	virtual string GetName() = 0;
+	virtual void Render() = 0;
 };
