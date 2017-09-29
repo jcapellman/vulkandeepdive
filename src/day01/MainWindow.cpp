@@ -9,7 +9,7 @@ MainWindow::MainWindow(string title, int xRes, int yRes) {
 	m_window = glfwCreateWindow(xRes, yRes, title.c_str(), nullptr, nullptr);
 }
 
-void MainWindow::Initialize()
+void MainWindow::Initialize(IRenderer renderer)
 {
 	uint32_t extensionCount = 0;
 	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
@@ -19,6 +19,8 @@ void MainWindow::Initialize()
 
 void MainWindow::MainLoop() {
 	while (!glfwWindowShouldClose(m_window)) {
+		m_renderer->Render();
+
 		glfwPollEvents();
 	}
 }
