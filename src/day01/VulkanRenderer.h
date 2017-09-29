@@ -2,11 +2,11 @@
 #include "Main.h"
 #include "IRenderer.h"
 
-class VulkanRenderer : IRenderer {
+class VulkanRenderer : public IRenderer {
 public:
-	void Render();
+	void Render() override;
 
-	string GetName()
+	string GetName() override
 	{
 		return "Vulkan";
 	}
