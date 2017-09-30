@@ -17,6 +17,12 @@ void MainWindow::Initialize(IRenderer * renderer)
 	cout << "Vulkan Extension Count: " << extensionCount << endl;
 
 	m_renderer = renderer;
+	
+	cout << "Initialzing Graphics Renderer: " << m_renderer->GetName() << endl;
+
+	if (!m_renderer->Initialize()) {
+		cout << m_renderer->GetName() << " could not initialize" << endl;
+	}
 }
 
 void MainWindow::MainLoop() {
