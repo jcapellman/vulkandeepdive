@@ -10,6 +10,8 @@ public:
 	{
 		return "Vulkan";
 	}
+
+	bool Initialize() override;
 private:
 	VkInstance instance;
 };
