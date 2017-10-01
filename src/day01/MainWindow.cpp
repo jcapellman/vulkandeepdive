@@ -9,20 +9,19 @@ MainWindow::MainWindow(string title, int xRes, int yRes) {
 	m_window = glfwCreateWindow(xRes, yRes, title.c_str(), nullptr, nullptr);
 }
 
-void MainWindow::Initialize(IRenderer * renderer)
+bool MainWindow::Initialize(IRenderer * renderer)
 {
-	uint32_t extensionCount = 0;
-	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-	cout << "Vulkan Extension Count: " << extensionCount << endl;
-
 	m_renderer = renderer;
 	
 	cout << "Initialzing Graphics Renderer: " << m_renderer->GetName() << endl;
 
 	if (!m_renderer->Initialize()) {
 		cout << m_renderer->GetName() << " could not initialize" << endl;
+
+		return false;
 	}
+
+	return true;
 }
 
 void MainWindow::MainLoop() {

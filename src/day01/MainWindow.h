@@ -7,7 +7,7 @@ class MainWindow {
 public:
 	MainWindow(string title, int xRes, int yRes);
 
-	void Initialize(IRenderer * renderer);
+	bool Initialize(IRenderer * renderer);
 
 	void MainLoop();
 
