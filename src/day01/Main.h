@@ -7,6 +7,7 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 
 #include <iostream>
+#include <fstream>
 #include <string>
 
 using namespace std;

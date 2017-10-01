@@ -3,10 +3,12 @@
 #include "Main.h"
 #include "IRenderer.h"
 #include "ReturnSet.h"
+#include "Logger.h"
+#include "BaseManager.h"
 
-class MainWindow {
+class MainWindow : public BaseManager {
 public:
-	MainWindow(string title, int xRes, int yRes);
+	MainWindow(string title, int xRes, int yRes, Logger * logger);
 
 	ReturnSet<bool> Initialize(IRenderer * renderer);
 

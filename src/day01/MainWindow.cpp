@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(string title, int xRes, int yRes) {
+MainWindow::MainWindow(string title, int xRes, int yRes, Logger * logger) : BaseManager(logger) {
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -13,15 +13,17 @@ ReturnSet<bool> MainWindow::Initialize(IRenderer * renderer)
 {
 	m_renderer = renderer;
 	
-	cout << "Initialzing Graphics Renderer: " << m_renderer->GetName() << endl;
-
+	AddLogMessage("Initialzing Graphics Renderer: " + m_renderer->GetName());
+	
 	auto graphicsRendererInitResult = m_renderer->Initialize();
 	
 	if (graphicsRendererInitResult.HasError()) {
-		cout << m_renderer->GetName() << " could not initialize due to an error" << endl;
+		AddLogMessage(m_renderer->GetName() + " could not initialize due to an error");
 
 		return ReturnSet<bool>(graphicsRendererInitResult.Exception());
 	}
+
+	AddLogMessage(m_renderer->GetName() + " initialized successfully");
 
 	return ReturnSet<bool>(true);
 }
