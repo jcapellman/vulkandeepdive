@@ -9,6 +9,10 @@ class VulkanRenderer : public IRenderer {
 public:
 	VulkanRenderer(Logger * logger) : IRenderer(logger) { }
 
+	~VulkanRenderer()
+	{
+		vkDestroyInstance(m_instance, nullptr);
+	}
 	void Render() override;
 
 	string GetName() override
@@ -18,5 +22,5 @@ public:
 
 	ReturnSet<bool> Initialize() override;
 private:
-	VkInstance instance;
+	VkInstance m_instance;
 };

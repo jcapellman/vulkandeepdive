@@ -27,9 +27,9 @@ ReturnSet<bool> VulkanRenderer::Initialize()
 	createInfo.ppEnabledExtensionNames = glfwExtensions;
 	createInfo.enabledLayerCount = 0;
 
-	auto vulkanInstance = vkCreateInstance(&createInfo, nullptr, &instance);
+	auto result = vkCreateInstance(&createInfo, nullptr, &m_instance);
 
-	if (vulkanInstance != VK_SUCCESS)
+	if (result != VK_SUCCESS)
 	{
 		return ReturnSet<bool>(exception("Could not initialize Vulkan Device"));
 	}
