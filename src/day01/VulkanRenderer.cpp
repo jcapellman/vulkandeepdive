@@ -4,7 +4,7 @@ void VulkanRenderer::Render() {
 
 }
 
-bool VulkanRenderer::Initialize()
+ReturnSet<bool> VulkanRenderer::Initialize()
 {
 	// TODO Properly Initialize Vulkan in Day 2
 	uint32_t extensionCount = 0;
@@ -12,5 +12,5 @@ bool VulkanRenderer::Initialize()
 
 	cout << "Vulkan Extension Count: " << extensionCount << endl;
 
-	return true;
+	return ReturnSet<bool>(true);
 }

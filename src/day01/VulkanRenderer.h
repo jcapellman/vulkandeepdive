@@ -1,6 +1,7 @@
 #pragma once
 #include "Main.h"
 #include "IRenderer.h"
+#include "ReturnSet.h"
 
 class VulkanRenderer : public IRenderer {
 public:
@@ -11,7 +12,7 @@ public:
 		return "Vulkan";
 	}
 
-	bool Initialize() override;
+	ReturnSet<bool> Initialize() override;
 private:
 	VkInstance instance;
 };
