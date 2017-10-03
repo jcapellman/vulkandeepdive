@@ -21,6 +21,8 @@ public:
 	}
 
 	ReturnSet<bool> Initialize() override;
+
+	ReturnSet<bool> EnumerateDevices();
 private:
 	VkInstance m_instance;
 };

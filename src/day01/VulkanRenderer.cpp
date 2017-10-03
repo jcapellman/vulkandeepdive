@@ -34,5 +34,36 @@ ReturnSet<bool> VulkanRenderer::Initialize()
 		return ReturnSet<bool>(exception("Could not initialize Vulkan Device"));
 	}
 
+	auto deviceEnumeration = EnumerateDevices();
+
+	if (deviceEnumeration.HasError())
+	{
+		return ReturnSet<bool>(deviceEnumeration.Exception());
+	}
+
+	return ReturnSet<bool>(true);
+}
+
+ReturnSet<bool> VulkanRenderer::EnumerateDevices()
+{
+	uint32_t deviceCount = 0;
+	auto result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, nullptr);
+
+	if (result != VK_SUCCESS) {
+		return ReturnSet<bool>(exception("Could not enumerate Vulkan Devices"));
+	}
+
+	if (deviceCount == 0) {
+		return ReturnSet<bool>(exception("Could not find any Vulkan Devices"));
+	}
+
+	vector<VkPhysicalDevice> vulkanDevices(deviceCount);
+
+	result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, &vulkanDevices[0]);
+
+	if (result != VK_SUCCESS) {
+		return ReturnSet<bool>(exception("Failed to enumerate device"));
+	}
+
 	return ReturnSet<bool>(true);
 }
