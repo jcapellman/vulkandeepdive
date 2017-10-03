@@ -44,7 +44,7 @@ ReturnSet<bool> VulkanRenderer::Initialize()
 	return ReturnSet<bool>(true);
 }
 
-ReturnSet<bool> VulkanRenderer::EnumerateDevices()
+ReturnSet<bool> VulkanRenderer::EnumerateDevices() const
 {
 	uint32_t deviceCount = 0;
 	auto result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, nullptr);
@@ -65,5 +65,17 @@ ReturnSet<bool> VulkanRenderer::EnumerateDevices()
 		return ReturnSet<bool>(exception("Failed to enumerate device"));
 	}
 
+	EnumerateDeviceInformation();
+
 	return ReturnSet<bool>(true);
+}
+
+void VulkanRenderer::EnumerateDeviceInformation() const
+{
+	VkPhysicalDeviceProperties deviceProperties;
+	
+	memset(&deviceProperties, 0, sizeof deviceProperties);
+	vkGetPhysicalDeviceProperties(m_physical_device, &deviceProperties);
+
+	AddLogMessage("Vulkan Device (" + string(deviceProperties.deviceName) +") enumerated successfully");
 }
