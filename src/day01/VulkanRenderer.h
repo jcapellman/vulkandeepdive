@@ -4,6 +4,7 @@
 #include "IRenderer.h"
 #include "ReturnSet.h"
 #include "Logger.h"
+#include "VulkanDevice.h"
 
 class VulkanRenderer : public IRenderer {
 public:
@@ -23,9 +24,7 @@ public:
 	ReturnSet<bool> Initialize() override;
 
 	ReturnSet<bool> EnumerateDevices();
-
-	void EnumerateDeviceInformation() const;
 private:
 	VkInstance m_instance;
-	VkPhysicalDevice m_physical_device;
+	VulkanDevice * m_device;
 };

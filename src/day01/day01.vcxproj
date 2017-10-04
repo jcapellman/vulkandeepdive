@@ -154,6 +154,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="ReturnSet.h" />
+    <ClInclude Include="VulkanDevice.h" />
     <ClInclude Include="VulkanRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
