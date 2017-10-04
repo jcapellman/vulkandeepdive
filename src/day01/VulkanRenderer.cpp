@@ -61,7 +61,7 @@ ReturnSet<bool> VulkanRenderer::EnumerateDevices()
 
 	result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, &vulkanDevices[0]);
 
-	if (result != VK_SUCCESS) {
+	if (result != VK_SUCCESS || vulkanDevices.size() == 0) {
 		return ReturnSet<bool>(exception("Failed to enumerate device"));
 	}
 
