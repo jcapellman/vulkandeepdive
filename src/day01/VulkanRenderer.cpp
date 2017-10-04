@@ -44,7 +44,7 @@ ReturnSet<bool> VulkanRenderer::Initialize()
 	return ReturnSet<bool>(true);
 }
 
-ReturnSet<bool> VulkanRenderer::EnumerateDevices() const
+ReturnSet<bool> VulkanRenderer::EnumerateDevices()
 {
 	uint32_t deviceCount = 0;
 	auto result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, nullptr);
@@ -64,6 +64,8 @@ ReturnSet<bool> VulkanRenderer::EnumerateDevices() const
 	if (result != VK_SUCCESS) {
 		return ReturnSet<bool>(exception("Failed to enumerate device"));
 	}
+
+	m_physical_device = vulkanDevices[0];
 
 	EnumerateDeviceInformation();
 
