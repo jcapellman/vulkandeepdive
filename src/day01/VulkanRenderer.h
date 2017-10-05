@@ -8,7 +8,7 @@
 
 class VulkanRenderer : public IRenderer {
 public:
-	explicit VulkanRenderer(Logger * logger) : IRenderer(logger), m_instance(nullptr), m_device(nullptr)
+	explicit VulkanRenderer(Logger * logger) : IRenderer(logger), m_instance(nullptr)
 	{
 	}
 
@@ -17,7 +17,6 @@ public:
 		vkDestroyInstance(m_instance, nullptr);
 
 		m_instance = nullptr;
-		m_device = nullptr;
 	}
 	void Render() override;
 
@@ -31,5 +30,5 @@ public:
 	ReturnSet<bool> EnumerateDevices();
 private:
 	VkInstance m_instance;
-	VulkanDevice * m_device;
+	vector<VulkanDevice> m_devices;
 };

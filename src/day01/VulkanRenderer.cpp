@@ -65,9 +65,14 @@ ReturnSet<bool> VulkanRenderer::EnumerateDevices()
 		return ReturnSet<bool>(exception("Failed to enumerate device"));
 	}
 
-	m_device = new VulkanDevice(vulkanDevices[0]);
+	for (auto device : vulkanDevices)
+	{
+		auto vulkanDevice = VulkanDevice(device);
 
-	AddLogMessage("Vulkan Device (" + m_device->GetName() + ") enumerated successfully");
+		m_devices.push_back(vulkanDevice);
 
+		AddLogMessage("Vulkan Device (" + vulkanDevice.GetName() + ") enumerated successfully");
+	}
+	
 	return ReturnSet<bool>(true);
 }
