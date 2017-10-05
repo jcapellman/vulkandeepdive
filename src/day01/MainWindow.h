@@ -12,7 +12,7 @@ public:
 
 	ReturnSet<bool> Initialize(IRenderer * renderer);
 
-	void MainLoop();
+	void MainLoop() const;
 
 	~MainWindow();
 private:

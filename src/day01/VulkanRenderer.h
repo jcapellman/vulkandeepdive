@@ -8,11 +8,16 @@
 
 class VulkanRenderer : public IRenderer {
 public:
-	VulkanRenderer(Logger * logger) : IRenderer(logger) { }
+	explicit VulkanRenderer(Logger * logger) : IRenderer(logger), m_instance(nullptr), m_device(nullptr)
+	{
+	}
 
 	~VulkanRenderer()
 	{
 		vkDestroyInstance(m_instance, nullptr);
+
+		m_instance = nullptr;
+		m_device = nullptr;
 	}
 	void Render() override;
 

@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(string title, int xRes, int yRes, Logger * logger) : BaseManager(logger) {
+MainWindow::MainWindow(string title, int xRes, int yRes, Logger * logger) : BaseManager(logger), m_renderer(nullptr)
+{
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -28,7 +29,8 @@ ReturnSet<bool> MainWindow::Initialize(IRenderer * renderer)
 	return ReturnSet<bool>(true);
 }
 
-void MainWindow::MainLoop() {
+void MainWindow::MainLoop() const
+{
 	while (!glfwWindowShouldClose(m_window)) {
 		m_renderer->Render();
 
