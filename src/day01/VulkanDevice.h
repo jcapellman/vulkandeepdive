@@ -7,18 +7,20 @@ class VulkanDevice
 	public:
 		string GetName() const
 		{
-			VkPhysicalDeviceProperties deviceProperties;
-
-			memset(&deviceProperties, 0, sizeof deviceProperties);
-			vkGetPhysicalDeviceProperties(m_device, &deviceProperties);
-
-			return string(deviceProperties.deviceName);
+			return string(m_physicalDeviceProperties.deviceName);
 		}
 
-		explicit VulkanDevice(VkPhysicalDevice device)
+		explicit VulkanDevice(VkPhysicalDevice physical_device): m_device(nullptr)
 		{
-			m_device = device;
+			m_physicalDevice = physical_device;
+
+			memset(&m_physicalDeviceProperties, 0, sizeof m_physicalDeviceProperties);
+			vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
 		}
-	private:
-		VkPhysicalDevice m_device;
+private:
+		VkPhysicalDevice m_physicalDevice;
+
+		VkDevice m_device;
+
+		VkPhysicalDeviceProperties m_physicalDeviceProperties;
 };
