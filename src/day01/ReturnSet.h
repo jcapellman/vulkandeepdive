@@ -3,35 +3,35 @@
 #include "Main.h"
 
 template <class T>
-class ReturnSet {
+class return_set {
 	public:
-		T ReturnValue;
+		T return_value;
 
-		exception Exception() const
+		exception caught_exception() const
 		{
-			return m_exception;
+			return m_exception_;
 		}
 
-		string ExceptionString() const
+		string exception_string() const
 		{
-			return m_exception.what();
+			return m_exception_.what();
 		}
 
-		bool HasError() const
+		bool has_error() const
 		{
-			return m_hasError;
+			return m_has_error_;
 		}
 
-		explicit ReturnSet(exception exception) {
-			m_exception = exception;
-			m_hasError = true;
+		explicit return_set(const exception exception) {
+			m_exception_ = exception;
+			m_has_error_ = true;
 		}
 
-		explicit ReturnSet(T objectValue) {
-			ReturnValue = objectValue;
-			m_hasError = false;
+		explicit return_set(T object_value) {
+			return_value = object_value;
+			m_has_error_ = false;
 		}
 	private:
-		exception m_exception;
-		bool m_hasError;
+		exception m_exception_;
+		bool m_has_error_;
 };

@@ -1,78 +1,78 @@
 #include "VulkanRenderer.h"
 
-void VulkanRenderer::Render() {
+void vulkan_renderer::Render() {
 
 }
 
-ReturnSet<bool> VulkanRenderer::Initialize()
+return_set<bool> vulkan_renderer::Initialize()
 {
-	VkApplicationInfo appInfo = {};
+	VkApplicationInfo app_info = {};
 
-	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-	appInfo.pApplicationName = "VulkanDeepDive";
-	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-	appInfo.pEngineName = "VulaknDeepDive";
-	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-	appInfo.apiVersion = VK_API_VERSION_1_0;
+	app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+	app_info.pApplicationName = "VulkanDeepDive";
+	app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+	app_info.pEngineName = "VulaknDeepDive";
+	app_info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+	app_info.apiVersion = VK_API_VERSION_1_0;
 
-	VkInstanceCreateInfo createInfo = {};
-	createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-	createInfo.pApplicationInfo = &appInfo;
+	VkInstanceCreateInfo create_info = {};
+	create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	create_info.pApplicationInfo = &app_info;
 
-	uint32_t glfwExtensionCount = 0;
+	uint32_t glfw_extension_count = 0;
 
-	auto glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+	const auto glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
 
-	createInfo.enabledExtensionCount = glfwExtensionCount;
-	createInfo.ppEnabledExtensionNames = glfwExtensions;
-	createInfo.enabledLayerCount = 0;
+	create_info.enabledExtensionCount = glfw_extension_count;
+	create_info.ppEnabledExtensionNames = glfw_extensions;
+	create_info.enabledLayerCount = 0;
 
-	auto result = vkCreateInstance(&createInfo, nullptr, &m_instance);
+	const auto result = vkCreateInstance(&create_info, nullptr, &m_instance_);
 
 	if (result != VK_SUCCESS)
 	{
-		return ReturnSet<bool>(exception("Could not initialize Vulkan Device"));
+		return return_set<bool>(exception("Could not initialize Vulkan Device"));
 	}
 
-	auto deviceEnumeration = EnumerateDevices();
+	auto device_enumeration = enumerate_devices();
 
-	if (deviceEnumeration.HasError())
+	if (device_enumeration.has_error())
 	{
-		return ReturnSet<bool>(deviceEnumeration.Exception());
+		return return_set<bool>(device_enumeration.caught_exception());
 	}
 
-	return ReturnSet<bool>(true);
+	return return_set<bool>(true);
 }
 
-ReturnSet<bool> VulkanRenderer::EnumerateDevices()
+return_set<bool> vulkan_renderer::enumerate_devices()
 {
-	uint32_t deviceCount = 0;
-	auto result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, nullptr);
+	uint32_t device_count = 0;
+	auto result = vkEnumeratePhysicalDevices(m_instance_, &device_count, nullptr);
 
 	if (result != VK_SUCCESS) {
-		return ReturnSet<bool>(exception("Could not enumerate Vulkan Devices"));
+		return return_set<bool>(exception("Could not enumerate Vulkan Devices"));
 	}
 
-	if (deviceCount == 0) {
-		return ReturnSet<bool>(exception("Could not find any Vulkan Devices"));
+	if (device_count == 0) {
+		return return_set<bool>(exception("Could not find any Vulkan Devices"));
 	}
 
-	vector<VkPhysicalDevice> vulkanDevices(deviceCount);
+	vector<VkPhysicalDevice> vulkanDevices(device_count);
 
-	result = vkEnumeratePhysicalDevices(m_instance, &deviceCount, &vulkanDevices[0]);
+	result = vkEnumeratePhysicalDevices(m_instance_, &device_count, &vulkanDevices[0]);
 
 	if (result != VK_SUCCESS || vulkanDevices.size() == 0) {
-		return ReturnSet<bool>(exception("Failed to enumerate device"));
+		return return_set<bool>(exception("Failed to enumerate device"));
 	}
 
 	for (auto device : vulkanDevices)
 	{
-		auto vulkanDevice = VulkanDevice(device);
+		auto v_device = vulkan_device(device);
 
-		m_devices.push_back(vulkanDevice);
+		m_devices_.push_back(v_device);
 
-		AddLogMessage("Vulkan Device (" + vulkanDevice.GetName() + ") enumerated successfully");
+		add_log_message("Vulkan Device (" + v_device.get_name() + ") enumerated successfully");
 	}
 	
-	return ReturnSet<bool>(true);
+	return return_set<bool>(true);
 }

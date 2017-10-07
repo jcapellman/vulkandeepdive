@@ -6,29 +6,30 @@
 #include "Logger.h"
 #include "VulkanDevice.h"
 
-class VulkanRenderer : public IRenderer {
-public:
-	explicit VulkanRenderer(Logger * logger) : IRenderer(logger), m_instance(nullptr)
-	{
-	}
+class vulkan_renderer : public IRenderer {
+	public:
+		explicit vulkan_renderer(logger * logger) : IRenderer(logger), m_instance_(nullptr)
+		{
+		}
 
-	~VulkanRenderer()
-	{
-		vkDestroyInstance(m_instance, nullptr);
+		~vulkan_renderer()
+		{
+			vkDestroyInstance(m_instance_, nullptr);
 
-		m_instance = nullptr;
-	}
-	void Render() override;
+			m_instance_ = nullptr;
+		}
 
-	string GetName() override
-	{
-		return "Vulkan";
-	}
+		void Render() override;
 
-	ReturnSet<bool> Initialize() override;
+		string GetName() override
+		{
+			return "Vulkan";
+		}
 
-	ReturnSet<bool> EnumerateDevices();
-private:
-	VkInstance m_instance;
-	vector<VulkanDevice> m_devices;
+		return_set<bool> Initialize() override;
+
+		return_set<bool> enumerate_devices();
+	private:
+		VkInstance m_instance_;
+		vector<vulkan_device> m_devices_;
 };

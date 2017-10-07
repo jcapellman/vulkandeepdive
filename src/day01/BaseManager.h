@@ -1,18 +1,18 @@
 #pragma once
 #include "Logger.h"
 
-class BaseManager
+class base_manager
 {
 	public:
-		explicit BaseManager(Logger * logger)
+		explicit base_manager(logger * logger)
 		{
-			m_logger = logger;
+			m_logger_ = logger;
 		}
 
-		void AddLogMessage(string message) const
+		void add_log_message(const string message) const
 		{
-			m_logger->Add(message);
+			m_logger_->add(message);
 		}
 	private:
-		Logger * m_logger;
+		logger * m_logger_;
 };

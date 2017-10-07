@@ -6,16 +6,16 @@
 #include "Logger.h"
 #include "BaseManager.h"
 
-class MainWindow : public BaseManager {
-public:
-	MainWindow(string title, int xRes, int yRes, Logger * logger);
+class main_window : public base_manager {
+	public:
+		main_window(string title, int x_res, int y_res, logger * logger);
 
-	ReturnSet<bool> Initialize(IRenderer * renderer);
+		return_set<bool> initialize(IRenderer * renderer);
 
-	void MainLoop() const;
+		void main_loop() const;
 
-	~MainWindow();
-private:
-	GLFWwindow * m_window;
-	IRenderer * m_renderer;
+		~main_window();
+	private:
+		GLFWwindow * m_window_;
+		IRenderer * m_renderer_;
 };

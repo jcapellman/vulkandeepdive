@@ -2,25 +2,25 @@
 
 #include "Main.h"
 
-class VulkanDevice
+class vulkan_device
 {
 	public:
-		string GetName() const
+		string get_name() const
 		{
-			return string(m_physicalDeviceProperties.deviceName);
+			return string(m_physical_device_properties_.deviceName);
 		}
 
-		explicit VulkanDevice(VkPhysicalDevice physical_device): m_device(nullptr)
+		explicit vulkan_device(const VkPhysicalDevice physical_device): m_device_(nullptr)
 		{
-			m_physicalDevice = physical_device;
+			m_physical_device_ = physical_device;
 
-			memset(&m_physicalDeviceProperties, 0, sizeof m_physicalDeviceProperties);
-			vkGetPhysicalDeviceProperties(m_physicalDevice, &m_physicalDeviceProperties);
+			memset(&m_physical_device_properties_, 0, sizeof m_physical_device_properties_);
+			vkGetPhysicalDeviceProperties(m_physical_device_, &m_physical_device_properties_);
 		}
-private:
-		VkPhysicalDevice m_physicalDevice;
+	private:
+		VkPhysicalDevice m_physical_device_;
 
-		VkDevice m_device;
+		VkDevice m_device_;
 
-		VkPhysicalDeviceProperties m_physicalDeviceProperties;
+		VkPhysicalDeviceProperties m_physical_device_properties_;
 };

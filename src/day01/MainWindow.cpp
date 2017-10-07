@@ -1,46 +1,46 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(string title, int xRes, int yRes, Logger * logger) : BaseManager(logger), m_renderer(nullptr)
+main_window::main_window(string title, const int x_res, const int y_res, logger * logger) : base_manager(logger), m_renderer_(nullptr)
 {
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	m_window = glfwCreateWindow(xRes, yRes, title.c_str(), nullptr, nullptr);
+	m_window_ = glfwCreateWindow(x_res, y_res, title.c_str(), nullptr, nullptr);
 }
 
-ReturnSet<bool> MainWindow::Initialize(IRenderer * renderer)
+return_set<bool> main_window::initialize(IRenderer * renderer)
 {
-	m_renderer = renderer;
+	m_renderer_ = renderer;
 	
-	AddLogMessage("Initialzing Graphics Renderer: " + m_renderer->GetName());
+	add_log_message("Initialzing Graphics Renderer: " + m_renderer_->GetName());
 	
-	auto graphicsRendererInitResult = m_renderer->Initialize();
+	auto graphicsRendererInitResult = m_renderer_->Initialize();
 	
-	if (graphicsRendererInitResult.HasError()) {
-		AddLogMessage(m_renderer->GetName() + " could not initialize due to an error");
+	if (graphicsRendererInitResult.has_error()) {
+		add_log_message(m_renderer_->GetName() + " could not initialize due to an error");
 
-		return ReturnSet<bool>(graphicsRendererInitResult.Exception());
+		return return_set<bool>(graphicsRendererInitResult.caught_exception());
 	}
 
-	AddLogMessage(m_renderer->GetName() + " initialized successfully");
+	add_log_message(m_renderer_->GetName() + " initialized successfully");
 
-	return ReturnSet<bool>(true);
+	return return_set<bool>(true);
 }
 
-void MainWindow::MainLoop() const
+void main_window::main_loop() const
 {
-	while (!glfwWindowShouldClose(m_window)) {
-		m_renderer->Render();
+	while (!glfwWindowShouldClose(m_window_)) {
+		m_renderer_->Render();
 
 		glfwPollEvents();
 	}
 }
 
-MainWindow::~MainWindow()
+main_window::~main_window()
 {
-	glfwDestroyWindow(m_window);
+	glfwDestroyWindow(m_window_);
 
 	glfwTerminate();
 }

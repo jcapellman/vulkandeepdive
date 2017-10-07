@@ -2,23 +2,23 @@
 
 #include "Main.h"
 
-class Logger
+class logger
 {
-public:
-	Logger(string filename)
-	{
-		m_file.open(filename);
-	}
+	public:
+		explicit logger(const string filename)
+		{
+			m_file_.open(filename);
+		}
 
-	~Logger()
-	{
-		m_file.close();
-	}
+		~logger()
+		{
+			m_file_.close();
+		}
 
-	void Add(string message)
-	{
-		m_file << message << endl;
-	}
-private:
-	ofstream m_file;
+		void add(const string message)
+		{
+			m_file_ << message << endl;
+		}
+	private:
+		ofstream m_file_;
 };
