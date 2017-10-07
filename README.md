@@ -4,4 +4,4 @@ Much like my deep dive into Redis/NodeJS (https://github.com/jcapellman/DaysInNo
 
 ## Days
 
-* Day 1 - Getting the Window open (https://github.com/jcapellman/vulkandeepdive/tree/master/src/day01)
+* Day 1 - Getting the Window open, devices enumerated and  (https://github.com/jcapellman/vulkandeepdive/tree/master/src/day01)
