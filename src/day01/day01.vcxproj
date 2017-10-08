@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="day01.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="main_window.cpp" />
     <ClCompile Include="vulkan_renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
