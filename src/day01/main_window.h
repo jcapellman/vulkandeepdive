@@ -2,9 +2,9 @@
 
 #include "Main.h"
 #include "IRenderer.h"
-#include "ReturnSet.h"
+#include "return_set.h"
 #include "Logger.h"
-#include "BaseManager.h"
+#include "base_manager.h"
 
 class main_window : public base_manager {
 	public:

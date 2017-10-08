@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+#include "main_window.h"
 
 main_window::main_window(string title, const int x_res, const int y_res, logger * logger) : base_manager(logger), m_renderer_(nullptr)
 {

@@ -145,17 +145,17 @@
   <ItemGroup>
     <ClCompile Include="day01.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="VulkanRenderer.cpp" />
+    <ClCompile Include="vulkan_renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseManager.h" />
+    <ClInclude Include="base_manager.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="ReturnSet.h" />
-    <ClInclude Include="VulkanDevice.h" />
-    <ClInclude Include="VulkanRenderer.h" />
+    <ClInclude Include="main_window.h" />
+    <ClInclude Include="return_set.h" />
+    <ClInclude Include="vulkan_device.h" />
+    <ClInclude Include="vulkan_renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

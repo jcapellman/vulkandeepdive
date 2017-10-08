@@ -2,9 +2,9 @@
 
 #include "Main.h"
 #include "IRenderer.h"
-#include "ReturnSet.h"
+#include "return_set.h"
 #include "Logger.h"
-#include "VulkanDevice.h"
+#include "vulkan_device.h"
 
 class vulkan_renderer : public IRenderer {
 	public:
