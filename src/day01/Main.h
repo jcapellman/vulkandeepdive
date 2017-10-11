@@ -18,5 +18,15 @@ using namespace std;
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "vulkan-1.lib")
 
-#define LOG_FILENAME "log.txt"
 #define APP_NAME "Vulkan Deep-dive Day 01"
+
+#define FILENAME_CONFIG "config.cfg"
+#define FILENAME_LOG "log.txt"
+
+// Config Keys
+#define CONFIG_XRES "XRES"
+#define CONFIG_YRES "YRES"
+
+// Default Config Keys
+#define DEFAULT_CONFIG_XRES 720
+#define DEFAULT_CONFIG_YRES 480
