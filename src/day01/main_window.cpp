@@ -1,13 +1,26 @@
 #include "main_window.h"
 
-main_window::main_window(string title, const int x_res, const int y_res, logger * logger) : base_manager(logger), m_renderer_(nullptr)
+main_window::main_window(string title, return_set<int> x_res, return_set<int> y_res, logger * logger) : base_manager(logger), m_renderer_(nullptr)
 {
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	m_window_ = glfwCreateWindow(x_res, y_res, title.c_str(), nullptr, nullptr);
+	auto xres = DEFAULT_CONFIG_XRES;
+	auto yres = DEFAULT_CONFIG_YRES;
+
+	if (!x_res.has_error())
+	{
+		xres = x_res.return_value;
+	}
+
+	if (!y_res.has_error())
+	{
+		yres = y_res.return_value;
+	}
+
+	m_window_ = glfwCreateWindow(xres, yres, title.c_str(), nullptr, nullptr);
 }
 
 return_set<bool> main_window::initialize(IRenderer * renderer)

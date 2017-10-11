@@ -8,7 +8,7 @@
 
 class main_window : public base_manager {
 	public:
-		main_window(string title, int x_res, int y_res, logger * logger);
+		main_window(string title, return_set<int> x_res, return_set<int> y_res, logger * logger);
 
 		return_set<bool> initialize(IRenderer * renderer);
 
