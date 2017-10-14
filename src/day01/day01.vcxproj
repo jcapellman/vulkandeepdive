@@ -155,6 +155,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="main_window.h" />
     <ClInclude Include="main_wrapper.h" />
+    <ClInclude Include="manager_container.h" />
     <ClInclude Include="return_set.h" />
     <ClInclude Include="vulkan_device.h" />
     <ClInclude Include="vulkan_renderer.h" />

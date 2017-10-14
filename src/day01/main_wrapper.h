@@ -6,6 +6,7 @@
 #include "vulkan_renderer.h"
 #include "logger.h"
 #include "config_parser.h"
+#include "manager_container.h"
 
 class main_wrapper
 {
@@ -16,7 +17,18 @@ public:
 		m_config_ = new config_parser(FILENAME_CONFIG);
 		m_vulkan_renderer_ = new vulkan_renderer(m_log_);
 
-		m_window_ = new main_window(APP_NAME, m_config_->get_int(CONFIG_XRES), m_config_->get_int(CONFIG_YRES), m_log_);
+		m_window_ = new main_window(APP_NAME, get_wrapper());
+	}
+
+	manager_container get_wrapper()
+	{
+		auto m_container = manager_container();
+
+		m_container.renderer = m_vulkan_renderer_;
+		m_container.config = m_config_;
+		m_log_ = m_log_;
+
+		return m_container;
 	}
 
 	bool init() const

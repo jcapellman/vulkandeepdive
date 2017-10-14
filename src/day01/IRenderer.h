@@ -7,7 +7,7 @@
 class IRenderer : public base_manager
 {
 	public:
-		explicit IRenderer(logger * logger) : base_manager(logger) {}
+		explicit IRenderer(manager_container container) : base_manager(container) {}
 
 		virtual ~IRenderer() = default;
 		virtual string GetName() = 0;
