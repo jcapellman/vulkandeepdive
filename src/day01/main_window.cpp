@@ -7,24 +7,10 @@ main_window::main_window(string title, manager_container container) : base_manag
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	auto xres = DEFAULT_CONFIG_XRES;
-	auto yres = DEFAULT_CONFIG_YRES;
-
 	auto config_xres = get_config()->get_int(CONFIG_XRES);
-
-	if (!config_xres.has_error())
-	{
-		xres = config_xres.return_value;
-	}
-
 	auto config_yres = get_config()->get_int(CONFIG_YRES);
 
-	if (!config_yres.has_error())
-	{
-		yres = config_yres.return_value;
-	}
-
-	m_window_ = glfwCreateWindow(xres, yres, title.c_str(), nullptr, nullptr);
+	m_window_ = glfwCreateWindow(config_xres.return_value, config_yres.return_value, title.c_str(), nullptr, nullptr);
 }
 
 return_set<bool> main_window::initialize(IRenderer * renderer)

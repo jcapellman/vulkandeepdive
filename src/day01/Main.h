@@ -22,11 +22,3 @@ using namespace std;
 
 #define FILENAME_CONFIG "config.cfg"
 #define FILENAME_LOG "log.txt"
-
-// Config Keys
-#define CONFIG_XRES "XRES"
-#define CONFIG_YRES "YRES"
-
-// Default Config Keys
-#define DEFAULT_CONFIG_XRES 720
-#define DEFAULT_CONFIG_YRES 480
