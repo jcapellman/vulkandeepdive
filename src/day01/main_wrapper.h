@@ -15,7 +15,7 @@ public:
 	{
 		m_log_ = new logger(FILENAME_LOG);
 		m_config_ = new config_parser(FILENAME_CONFIG);
-		m_vulkan_renderer_ = new vulkan_renderer(m_log_);
+		m_vulkan_renderer_ = new vulkan_renderer(get_wrapper());
 
 		m_window_ = new main_window(APP_NAME, get_wrapper());
 	}
@@ -24,7 +24,6 @@ public:
 	{
 		auto m_container = manager_container();
 
-		m_container.renderer = m_vulkan_renderer_;
 		m_container.config = m_config_;
 		m_log_ = m_log_;
 

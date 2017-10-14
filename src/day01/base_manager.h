@@ -14,6 +14,10 @@ class base_manager
 		{
 			m_container_.log->add(message);
 		}
+
+		config_parser * get_config() {
+			return m_container_.config;
+		}
 	private:
 		manager_container m_container_;
 };

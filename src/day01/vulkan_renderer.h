@@ -3,12 +3,12 @@
 #include "Main.h"
 #include "IRenderer.h"
 #include "return_set.h"
-#include "Logger.h"
+#include "manager_container.h"
 #include "vulkan_device.h"
 
 class vulkan_renderer : public IRenderer {
 	public:
-		explicit vulkan_renderer(logger * logger) : IRenderer(logger), m_instance_(nullptr)
+		explicit vulkan_renderer(manager_container container) : IRenderer(container), m_instance_(nullptr)
 		{
 		}
 

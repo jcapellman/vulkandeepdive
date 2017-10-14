@@ -1,6 +1,6 @@
 #include "main_window.h"
 
-main_window::main_window(string title, return_set<int> x_res, return_set<int> y_res, logger * logger) : base_manager(logger), m_renderer_(nullptr)
+main_window::main_window(string title, manager_container container) : base_manager(container), m_renderer_(nullptr)
 {
 	glfwInit();
 
@@ -10,14 +10,18 @@ main_window::main_window(string title, return_set<int> x_res, return_set<int> y_
 	auto xres = DEFAULT_CONFIG_XRES;
 	auto yres = DEFAULT_CONFIG_YRES;
 
-	if (!x_res.has_error())
+	auto config_xres = get_config()->get_int(CONFIG_XRES);
+
+	if (!config_xres.has_error())
 	{
-		xres = x_res.return_value;
+		xres = config_xres.return_value;
 	}
 
-	if (!y_res.has_error())
+	auto config_yres = get_config()->get_int(CONFIG_YRES);
+
+	if (!config_yres.has_error())
 	{
-		yres = y_res.return_value;
+		yres = config_yres.return_value;
 	}
 
 	m_window_ = glfwCreateWindow(xres, yres, title.c_str(), nullptr, nullptr);
