@@ -15,8 +15,19 @@ public:
 	{
 		m_log_ = new logger(FILENAME_LOG);
 		m_config_ = new config_parser(FILENAME_CONFIG);
-		m_vulkan_renderer_ = new vulkan_renderer(get_wrapper());
 
+		auto gfx_renderer = m_config_->get_string(CONFIG_GFX_RENDERER);
+
+		if (gfx_renderer.has_error()) {
+			m_log_->add(gfx_renderer.exception_string());
+
+			return;
+		}
+
+		if (gfx_renderer.return_value == "Vulkan") {
+			m_gfx_renderer_ = new vulkan_renderer(get_wrapper());
+		}
+		
 		m_window_ = new main_window(APP_NAME, get_wrapper());
 	}
 
@@ -32,7 +43,7 @@ public:
 
 	bool init() const
 	{
-		auto init_result = m_window_->initialize(m_vulkan_renderer_);
+		auto init_result = m_window_->initialize(m_gfx_renderer_);
 
 		if (init_result.has_error()) {
 			m_log_->add("Could not Initialize (due to " + init_result.exception_string() + "), exiting...");
@@ -52,11 +63,11 @@ public:
 	{
 		m_log_ = nullptr;
 		m_config_ = nullptr;
-		m_vulkan_renderer_ = nullptr;
+		m_gfx_renderer_ = nullptr;
 	}
 private:
 	logger * m_log_;
 	config_parser * m_config_;
-	vulkan_renderer * m_vulkan_renderer_;
+	igfxrenderer * m_gfx_renderer_;
 	main_window * m_window_;
 };

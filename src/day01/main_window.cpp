@@ -13,7 +13,7 @@ main_window::main_window(string title, manager_container container) : base_manag
 	m_window_ = glfwCreateWindow(config_xres.return_value, config_yres.return_value, title.c_str(), nullptr, nullptr);
 }
 
-return_set<bool> main_window::initialize(IRenderer * renderer)
+return_set<bool> main_window::initialize(igfxrenderer * renderer)
 {
 	m_renderer_ = renderer;
 	

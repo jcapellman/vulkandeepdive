@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Main.h"
-#include "IRenderer.h"
+#include "igfxrenderer.h"
 #include "return_set.h"
 #include "manager_container.h"
 #include "vulkan_device.h"
 
-class vulkan_renderer : public IRenderer {
+class vulkan_renderer : public igfxrenderer {
 	public:
-		explicit vulkan_renderer(manager_container container) : IRenderer(container), m_instance_(nullptr)
+		explicit vulkan_renderer(manager_container container) : igfxrenderer(container), m_instance_(nullptr)
 		{
 		}
 
