@@ -107,7 +107,7 @@ class config_parser
 	private:
 		map<CONFIG_OPTIONS, string> m_config_values_;
 
-		return_set<string> get_default_value(CONFIG_OPTIONS config_option) {
+		static return_set<string> get_default_value(CONFIG_OPTIONS config_option) {
 			switch (config_option) {
 				case CONFIG_GFX_RENDERER:					
 					return return_set<string>(DEFAULT_CONFIG_GFX_RENDERER);

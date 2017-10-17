@@ -15,7 +15,8 @@ class base_manager
 			m_container_.log->add(message);
 		}
 
-		config_parser * get_config() {
+		config_parser * get_config() const
+		{
 			return m_container_.config;
 		}
 	private:
