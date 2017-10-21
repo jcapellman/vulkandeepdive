@@ -19,11 +19,11 @@ public:
 
 		auto extensions = get_extensions();
 
-		cout << "Supported Extensions:" << endl;
+		cout << "Supported Vulkan Extensions:" << endl;
 
 		for (auto x = 0; x < extensions.size(); x++)
 		{
-			cout << x + 1 << extensions.at(x) << endl;
+			cout << x + 1 << ". " << extensions.at(x) << endl;
 		}
 	}
 private:
