@@ -17,7 +17,7 @@ class logger
 
 		void add(const string message)
 		{
-			m_file_ << message << endl;
+			//m_file_ << message << endl;
 		}
 	private:
 		ofstream m_file_;
