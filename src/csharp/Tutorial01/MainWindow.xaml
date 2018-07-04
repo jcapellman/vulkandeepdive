@@ -1,0 +1,32 @@
+﻿<Window x:Class="Tutorial01.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tutorial01"
+        xmlns:viewModel="clr-namespace:Tutorial01.ViewModel"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        Title="Vulkan Deep Dive - Tutorial 1">
+
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Grid Style="{StaticResource ContainerGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
+
+        <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding AvailableDevices}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" Style="{StaticResource ListViewItemStyle}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
