@@ -24,7 +24,17 @@
         <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding AvailableDevices}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Name}" Style="{StaticResource ListViewItemStyle}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="{Binding Name}" Style="{StaticResource ListViewItemStyle}" />
+                        <Label Grid.Column="1" Content=" - " Style="{StaticResource ListViewItemStyle}" />
+                        <Label Grid.Column="2" Content="{Binding DeviceType}" Style="{StaticResource ListViewItemStyle}" />
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

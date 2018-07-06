@@ -1,4 +1,5 @@
-﻿using SharpVulkan;
+﻿using System.Linq;
+using SharpVulkan;
 
 using Tutorial01.Helpers;
 
@@ -11,6 +12,16 @@ namespace Tutorial01.Objects
         public VulkanDevice(PhysicalDevice physicalDevice)
         {
             _physicalDevice = physicalDevice;
+        }
+
+        public string DeviceType
+        {
+            get
+            {
+                _physicalDevice.GetProperties(out var properties);
+
+                return properties.DeviceType.ToString();
+            }
         }
 
         private string _name;
