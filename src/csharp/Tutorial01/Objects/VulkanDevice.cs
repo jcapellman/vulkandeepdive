@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SharpVulkan;
+﻿using SharpVulkan;
 
 using Tutorial01.Helpers;
 
