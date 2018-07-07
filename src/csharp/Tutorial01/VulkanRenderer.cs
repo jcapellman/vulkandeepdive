@@ -9,7 +9,7 @@ using Tutorial01.Objects;
 
 namespace Tutorial01
 {
-    public class VulkanRenderer :IDisposable
+    public class VulkanRenderer : IDisposable
     {
         private Instance _instance;
 
