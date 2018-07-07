@@ -37,9 +37,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpVulkan, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVulkanNetStandard.1.0.0\lib\netstandard2.0\SharpVulkan.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -52,6 +49,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="VulkanNET, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VulkanNET.1.0.1\lib\netstandard2.0\VulkanNET.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -62,7 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\ReturnSet.cs" />
-    <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Objects\VulkanDevice.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="VulkanRenderer.cs" />
