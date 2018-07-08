@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:common="clr-namespace:Tutorial01.Common"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="WindowBackgroundColor" Color="#1e1e1e" />
     <SolidColorBrush x:Key="WindowHighlightColor" Color="#9e9e9e" />
@@ -12,15 +13,19 @@
     <SolidColorBrush x:Key="HoverBackgroundColor" Color="#4e4e4e" />
     <SolidColorBrush x:Key="HoverForegroundColor" Color="White" />
 
+    <system:Double x:Key="WindowFooterFontSize">10</system:Double>
     <system:Double x:Key="WindowFontSize">14</system:Double>
+    <system:Double x:Key="WindowHeaderFontSize">20</system:Double>
+    <x:Static x:Key="AppName" Member="common:Constants.TutorialName" />
 
     <Style TargetType="Window" x:Key="WindowStyle">
-        <Setter Property="Height" Value="480" />
-        <Setter Property="MinHeight" Value="480" />
+        <Setter Property="Height" Value="640" />
         <Setter Property="Width" Value="640" />
-        <Setter Property="MinWidth" Value="640" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="Icon" Value="../Images/Vulkan_LogoBug_48px_Nov17.png" />
         <Setter Property="Background" Value="{StaticResource WindowBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+        <Setter Property="Title" Value="{StaticResource AppName}" />
     </Style>
 
     <Style TargetType="Grid" x:Key="ContainerGridStyle">
@@ -53,6 +58,25 @@
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
         <Setter Property="Height" Value="200" />
         <Setter Property="IsReadOnly" Value="True" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="VulkanLogoStyle">
+        <Setter Property="Source" Value="../Images/Vulkan_170px_Dec16.png" />
+        <Setter Property="Height" Value="100" />
+        <Setter Property="Stretch" Value="Uniform" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="TutorialHeaderStyle">
+        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource WindowHeaderFontSize}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Content" Value="{StaticResource AppName}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="FooterLabelStyle">
+        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource WindowFooterFontSize}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="Button" x:Key="LaunchButtonStyle">

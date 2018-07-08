@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:Tutorial01.ViewModel"
+        xmlns:viewModel="clr-namespace:Tutorial01.ViewModel"        
         mc:Ignorable="d"
-        Style="{StaticResource WindowStyle}"
-        Title="Vulkan Deep Dive - Tutorial 1">
+        Style="{StaticResource WindowStyle}">
 
     <Window.DataContext>
         <viewModel:MainWindowViewModel />
@@ -16,10 +15,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Style="{StaticResource FormGroupGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Style="{StaticResource VulkanLogoStyle}" />
+            <Label Grid.Row="1" Style="{StaticResource TutorialHeaderStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Style="{StaticResource FormGroupGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -46,7 +56,7 @@
             </ComboBox>
         </Grid>
 
-        <Grid Grid.Row="1" Style="{StaticResource FormGroupGridStyle}">
+        <Grid Grid.Row="2" Style="{StaticResource FormGroupGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -56,13 +66,15 @@
             <TextBox Grid.Row="1" Style="{StaticResource TextBoxStyle}" />
         </Grid>
 
-        <Grid Grid.Row="2" Style="{StaticResource FormGroupGridStyle}">
+        <Grid Grid.Row="3" Style="{StaticResource FormGroupGridStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Button Grid.Row="1" Content="Launch" Command="{Binding LaunchRendererCommand}" IsEnabled="{Binding LaunchBtnEnabled}" Style="{StaticResource LaunchButtonStyle}" />
+            <Label Grid.Row="2" Content="Vulkan and the Vulkan logo are registered trademarks of the Khronos Group Inc." Style="{StaticResource FooterLabelStyle}" />
         </Grid>
     </Grid>
 </Window>

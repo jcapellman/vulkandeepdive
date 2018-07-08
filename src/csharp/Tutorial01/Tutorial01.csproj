@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandHandler.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\ExtensionMethods.cs" />
     <Compile Include="Enums\ExtensionNames.cs" />
     <Compile Include="Common\ReturnSet.cs" />
@@ -117,6 +118,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Vulkan_170px_Dec16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Vulkan_LogoBug_48px_Nov17.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
