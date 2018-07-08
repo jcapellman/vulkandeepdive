@@ -37,12 +37,7 @@ namespace Tutorial01
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var initializeResult = ViewModel.InitializeRenderer();
-
-            if (initializeResult.IsNullOrError)
-            {
-                MessageBox.Show($"Error Occurred initializing Vulkan: {initializeResult.Error}");
-            }
+            ViewModel.InitializeRenderer();
         }
     }
 }

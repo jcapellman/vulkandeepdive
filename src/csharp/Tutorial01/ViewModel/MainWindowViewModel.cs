@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -64,32 +65,66 @@ namespace Tutorial01.ViewModel
             }
         }
 
+        private ObservableCollection<string> _messageLog;
+
+        public ObservableCollection<string> MessageLog
+        {
+            get => _messageLog;
+
+            set
+            {
+                _messageLog = value;
+                OnPropertyChanged();
+            }
+        }
+
         private readonly VulkanRenderer _vulkanRenderer;
 
         public MainWindowViewModel()
         {            
+            MessageLog = new ObservableCollection<string>();
+
             _vulkanRenderer = new VulkanRenderer();
         }
 
-        public ReturnSet<bool> InitializeRenderer()
+        private enum LogType
+        {
+            ERROR,
+            INFO
+        }
+
+        private void AddMessage(string message, LogType logType = LogType.INFO)
+        {
+            _messageLog.Add($"{DateTime.Now} - ({logType}): {message}{Environment.NewLine}");
+        }
+
+        private void AddException(Exception exception) => AddMessage(exception.ToString(), LogType.ERROR);
+
+        public void InitializeRenderer()
         {
             var initResult = _vulkanRenderer.Initialize();
 
             if (initResult.IsNullOrError)
             {
-                return new ReturnSet<bool>(initResult.Error);
+                AddException(initResult.Error);
+
+                return;
             }
+
+            AddMessage("Initialized Successfully");
 
             AvailableDevices = new ObservableCollection<VulkanDevice>(_vulkanRenderer.Devices);
 
             if (!AvailableDevices.Any())
             {
-                return new ReturnSet<bool>(false);
+                AddMessage("No Vulkan devices available");
+
+                return;
             }
 
             SelectedDevice = AvailableDevices.FirstOrDefault();
 
-            return new ReturnSet<bool>(true);
+            AddMessage($"{AvailableDevices.Count} Vulkan Device(s) found");
         }
 
         private ICommand _launchRendererCommand;

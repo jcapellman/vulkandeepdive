@@ -42,11 +42,10 @@
         <Setter Property="Margin" Value="0,0,0,5" />
     </Style>
 
-    <Style TargetType="TextBox" x:Key="TextBoxStyle">
+    <Style TargetType="ListView" x:Key="ListViewStyle">
         <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
         <Setter Property="Height" Value="200" />
-        <Setter Property="IsReadOnly" Value="True" />
     </Style>
 
     <Style TargetType="Image" x:Key="VulkanLogoStyle">

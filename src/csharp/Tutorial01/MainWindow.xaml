@@ -47,7 +47,7 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Content="Log" Style="{StaticResource FieldLabelStyle}"/>
-            <TextBox Grid.Row="1" Style="{StaticResource TextBoxStyle}" />
+            <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding MessageLog, Mode=TwoWay}" />
         </Grid>
 
         <Grid Grid.Row="3" Style="{StaticResource FormGroupGridStyle}">
