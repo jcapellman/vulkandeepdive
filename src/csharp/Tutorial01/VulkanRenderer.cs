@@ -55,7 +55,7 @@ namespace Tutorial01
                 var applicationInfo = new ApplicationInfo
                 {
                     StructureType = StructureType.ApplicationInfo,
-                    EngineVersion = 0,
+                    EngineVersion = 0,                    
                     ApiVersion = Vulkan.ApiVersion
                 };
 
@@ -133,7 +133,7 @@ namespace Tutorial01
 
         public VulkanRenderer()
         {
-            form = new RenderForm("Vulkan Tutorial 1");
+            form = new RenderForm(Constants.TutorialName);
         }
 
         private unsafe void ReleaseUnmanagedResources()
