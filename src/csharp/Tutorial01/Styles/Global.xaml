@@ -1,9 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="WindowBackgroundColor" Color="#1e1e1e" />
+    <SolidColorBrush x:Key="WindowHighlightColor" Color="#9e9e9e" />
     <SolidColorBrush x:Key="WindowAltBackgroundColor" Color="#2e2e2e" />
     <SolidColorBrush x:Key="WindowTextColor" Color="White" />
     <SolidColorBrush x:Key="WindowAltTextColor" Color="#007ACC" />
+    <SolidColorBrush x:Key="DisabledBackgroundColor" Color="#8e8e8e" />
+    <SolidColorBrush x:Key="DisabledForegroundColor" Color="Black" />
+
+    <SolidColorBrush x:Key="HoverBackgroundColor" Color="#4e4e4e" />
+    <SolidColorBrush x:Key="HoverForegroundColor" Color="White" />
+
+    <system:Double x:Key="WindowFontSize">14</system:Double>
 
     <Style TargetType="Window" x:Key="WindowStyle">
         <Setter Property="Height" Value="480" />
@@ -18,26 +27,74 @@
         <Setter Property="Margin" Value="10,10,10,10" />
     </Style>
 
-    <Style TargetType="Label" x:Key="FieldLabelStyle">
-        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
-        <Setter Property="FontSize" Value="14" />
+    <Style TargetType="Grid" x:Key="FormGroupGridStyle">
         <Setter Property="Margin" Value="0,0,0,10" />
     </Style>
 
-    <Style TargetType="ListView" x:Key="ListViewStyle">
+    <Style TargetType="Label" x:Key="FieldLabelStyle">
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{StaticResource WindowFontSize}" />
+        <Setter Property="Margin" Value="0,0,0,5" />
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource WindowFontSize}" />
         <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
     </Style>
 
-    <Style TargetType="Label" x:Key="ListViewItemStyle">
+    <Style TargetType="Label" x:Key="ComboBoxItemStyle">
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{StaticResource WindowFontSize}" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="TextBoxStyle">
+        <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
+        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+        <Setter Property="Height" Value="200" />
+        <Setter Property="IsReadOnly" Value="True" />
     </Style>
 
     <Style TargetType="Button" x:Key="LaunchButtonStyle">
         <Setter Property="Margin" Value="0,10,0,10" />
-        <Setter Property="Background" Value="#2e2e2e" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
+        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" 
+                            BorderThickness="1"
+                            Padding="4,2" 
+                            BorderBrush="{StaticResource WindowHighlightColor}" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="TextElement.Foreground" Value="{StaticResource HoverForegroundColor}" />
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource HoverBackgroundColor}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
+                            <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundColor}" />
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

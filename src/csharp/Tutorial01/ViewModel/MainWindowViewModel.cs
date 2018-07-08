@@ -22,6 +22,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 using Tutorial01.Common;
 using Tutorial01.Objects;
 
@@ -43,13 +44,29 @@ namespace Tutorial01.ViewModel
         {
             get => _selectedDevice;
 
-            set { _selectedDevice = value; OnPropertyChanged(); }
+            set { _selectedDevice = value;
+                OnPropertyChanged();
+                LaunchBtnEnabled = value != null;
+            }
+        }
+
+        private bool _launchBtnEnabled;
+
+        public bool LaunchBtnEnabled
+        {
+            get => _launchBtnEnabled;
+
+            set
+            {
+                _launchBtnEnabled = value;
+                OnPropertyChanged();
+            }
         }
 
         private readonly VulkanRenderer _vulkanRenderer;
 
         public MainWindowViewModel()
-        {
+        {            
             _vulkanRenderer = new VulkanRenderer();
         }
 

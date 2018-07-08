@@ -15,30 +15,54 @@
     <Grid Style="{StaticResource ContainerGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
+        <Grid Grid.Row="0" Style="{StaticResource FormGroupGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" ItemsSource="{Binding AvailableDevices}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
 
-                        <Label Grid.Column="0" Content="{Binding Name}" Style="{StaticResource ListViewItemStyle}" />
-                        <Label Grid.Column="1" Content=" - " Style="{StaticResource ListViewItemStyle}" />
-                        <Label Grid.Column="2" Content="{Binding DeviceType}" Style="{StaticResource ListViewItemStyle}" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <ComboBox Grid.Row="1" Style="{StaticResource ComboBoxStyle}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" ItemsSource="{Binding AvailableDevices}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="2" Content="Launch" Command="{Binding LaunchRendererCommand}" Style="{StaticResource LaunchButtonStyle}" />
+                            <Label Grid.Column="0" Content="{Binding Name}" Style="{StaticResource ComboBoxItemStyle}" />
+                            <Label Grid.Column="1" Content=" - " Style="{StaticResource ComboBoxItemStyle}" />
+                            <Label Grid.Column="2" Content="{Binding DeviceType}" Style="{StaticResource ComboBoxItemStyle}" />
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="1" Style="{StaticResource FormGroupGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Log" Style="{StaticResource FieldLabelStyle}"/>
+            <TextBox Grid.Row="1" Style="{StaticResource TextBoxStyle}" />
+        </Grid>
+
+        <Grid Grid.Row="2" Style="{StaticResource FormGroupGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="1" Content="Launch" Command="{Binding LaunchRendererCommand}" IsEnabled="{Binding LaunchBtnEnabled}" Style="{StaticResource LaunchButtonStyle}" />
+        </Grid>
     </Grid>
 </Window>
