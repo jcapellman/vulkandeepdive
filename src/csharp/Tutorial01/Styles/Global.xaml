@@ -42,17 +42,6 @@
         <Setter Property="Margin" Value="0,0,0,5" />
     </Style>
 
-    <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
-        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource WindowFontSize}" />
-        <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="ComboBoxItemStyle">
-        <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource WindowFontSize}" />
-    </Style>
-
     <Style TargetType="TextBox" x:Key="TextBoxStyle">
         <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
@@ -80,7 +69,6 @@
     </Style>
 
     <Style TargetType="Button" x:Key="LaunchButtonStyle">
-        <Setter Property="Margin" Value="0,10,0,10" />
         <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
         <Setter Property="VerticalAlignment" Value="Bottom" />

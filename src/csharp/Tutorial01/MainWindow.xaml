@@ -37,23 +37,7 @@
 
             <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
 
-            <ComboBox Grid.Row="1" Style="{StaticResource ComboBoxStyle}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" ItemsSource="{Binding AvailableDevices}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Column="0" Content="{Binding Name}" Style="{StaticResource ComboBoxItemStyle}" />
-                            <Label Grid.Column="1" Content=" - " Style="{StaticResource ComboBoxItemStyle}" />
-                            <Label Grid.Column="2" Content="{Binding DeviceType}" Style="{StaticResource ComboBoxItemStyle}" />
-                        </Grid>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <Button Grid.Row="1" Content="{Binding SelectedDevice.Name}" Style="{StaticResource LaunchButtonStyle}" />
         </Grid>
 
         <Grid Grid.Row="2" Style="{StaticResource FormGroupGridStyle}">

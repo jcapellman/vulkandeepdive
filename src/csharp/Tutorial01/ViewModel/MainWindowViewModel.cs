@@ -20,6 +20,7 @@
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -80,6 +81,13 @@ namespace Tutorial01.ViewModel
             }
 
             AvailableDevices = new ObservableCollection<VulkanDevice>(_vulkanRenderer.Devices);
+
+            if (!AvailableDevices.Any())
+            {
+                return new ReturnSet<bool>(false);
+            }
+
+            SelectedDevice = AvailableDevices.FirstOrDefault();
 
             return new ReturnSet<bool>(true);
         }
