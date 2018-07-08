@@ -18,10 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Tutorial01.Common
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+using Tutorial01.Common;
+
+namespace Tutorial01.ViewModel
 {
-    public static class Constants
+    public class BaseViewModel : INotifyPropertyChanged
     {
-        public const string TutorialName = "Vulkan Deep Dive - Tutorial 1";
+        protected readonly Logger logger;
+
+        protected BaseViewModel()
+        {
+            logger = new Logger();
+        }
+
+        protected void AddLog(string message)
+        {
+            logger.AddMessage(message);
+        }
+
+        protected void AddErrorLog(Exception exception)
+        {
+            logger.AddException(exception);
+        }
+
+        #region MVVM Boilerplate code
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

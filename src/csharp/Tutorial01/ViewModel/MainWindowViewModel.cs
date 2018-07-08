@@ -18,11 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 using Tutorial01.Common;
@@ -30,7 +27,7 @@ using Tutorial01.Objects;
 
 namespace Tutorial01.ViewModel
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : BaseViewModel
     {
         private ObservableCollection<VulkanDevice> _availableDevices;
 
@@ -76,40 +73,19 @@ namespace Tutorial01.ViewModel
             }
         }
 
-        private ObservableCollection<string> _messageLog;
-
         public ObservableCollection<string> MessageLog
         {
-            get => _messageLog;
+            get => logger.MessageLog;
 
-            set
-            {
-                _messageLog = value;
-                OnPropertyChanged();
-            }
+            set => OnPropertyChanged();
         }
 
         private readonly VulkanRenderer _vulkanRenderer;
 
         public MainWindowViewModel()
-        {            
-            MessageLog = new ObservableCollection<string>();
-
+        {
             _vulkanRenderer = new VulkanRenderer();
         }
-
-        private enum LogType
-        {
-            ERROR,
-            INFO
-        }
-
-        private void AddMessage(string message, LogType logType = LogType.INFO)
-        {
-            _messageLog.Add($"{DateTime.Now} - ({logType}): {message}{Environment.NewLine}");
-        }
-
-        private void AddException(Exception exception) => AddMessage(exception.ToString(), LogType.ERROR);
 
         public void InitializeRenderer()
         {
@@ -117,18 +93,18 @@ namespace Tutorial01.ViewModel
 
             if (initResult.IsNullOrError)
             {
-                AddException(initResult.Error);
+                AddErrorLog(initResult.Error);
 
                 return;
             }
 
-            AddMessage("Initialized Successfully");
+            AddLog("Initialized Successfully");
 
             AvailableDevices = new ObservableCollection<VulkanDevice>(_vulkanRenderer.Devices);
 
             if (!AvailableDevices.Any())
             {
-                AddMessage("No Vulkan devices available, verify your drivers are installed");
+                AddLog("No Vulkan devices available, verify your drivers are installed");
 
                 SelectedDeviceName = "No Vulkan Device Found";
 
@@ -137,7 +113,7 @@ namespace Tutorial01.ViewModel
 
             SelectedDevice = AvailableDevices.FirstOrDefault();
 
-            AddMessage($"{AvailableDevices.Count} Vulkan Device(s) found");
+            AddLog($"{AvailableDevices.Count} Vulkan Device(s) found");
         }
 
         private ICommand _launchRendererCommand;
@@ -148,14 +124,5 @@ namespace Tutorial01.ViewModel
         {
             _vulkanRenderer.InitializeLogicalDevice(SelectedDevice);
         }
-
-        #region MVVM Boilerplate code
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

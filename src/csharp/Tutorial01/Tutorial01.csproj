@@ -73,9 +73,11 @@
     <Compile Include="Common\CommandHandler.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\ExtensionMethods.cs" />
+    <Compile Include="Common\Logger.cs" />
     <Compile Include="Enums\ExtensionNames.cs" />
     <Compile Include="Common\ReturnSet.cs" />
     <Compile Include="Objects\VulkanDevice.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="VulkanRenderer.cs" />
     <Page Include="MainWindow.xaml">
