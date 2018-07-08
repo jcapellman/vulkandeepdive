@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 using SharpDX.Windows;
@@ -46,6 +45,8 @@ namespace Tutorial01
 
         public List<VulkanDevice> Devices => _instance.PhysicalDevices.Select(a => new VulkanDevice(a)).ToList();
 
+        private IntPtr[] BuildExtensionArray(params ExtensionNames[] extensionName) => extensionName.Select(a => a.ToIntPtr()).ToArray();
+
         public unsafe ReturnSet<bool> Initialize()
         {
             try
@@ -57,12 +58,8 @@ namespace Tutorial01
                     ApiVersion = Vulkan.ApiVersion
                 };
 
-                var enabledExtensionNames = new[]
-                {
-                    Marshal.StringToHGlobalAnsi("VK_KHR_surface"),
-                    Marshal.StringToHGlobalAnsi("VK_KHR_win32_surface"),
-                    Marshal.StringToHGlobalAnsi("VK_EXT_debug_report"),
-                };
+                var enabledExtensionNames =
+                    BuildExtensionArray(ExtensionNames.VK_KHR_surface, ExtensionNames.VK_KHR_win32_surface, ExtensionNames.VK_EXT_debug_report);
 
                 fixed (void* enabledExtensionNamesPointer = &enabledExtensionNames[0])
                 {
@@ -111,10 +108,7 @@ namespace Tutorial01
                 ShaderClipDistance = true,
             };
 
-            var enabledExtensionNames = new []
-            {
-                Marshal.StringToHGlobalAnsi("VK_KHR_swapchain"),
-            };
+            var enabledExtensionNames = BuildExtensionArray(ExtensionNames.VK_KHR_swapchain);
 
             fixed (void * enabledExtensionNamesPtr = &enabledExtensionNames[0])
             {
@@ -146,7 +140,7 @@ namespace Tutorial01
             _instance.DestroySurface(_surface);
 
             foreach (var device in Devices)
-            {
+            {                
                 device.Dispose();
             }
             

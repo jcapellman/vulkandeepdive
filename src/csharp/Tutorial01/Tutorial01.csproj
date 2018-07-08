@@ -68,6 +68,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandHandler.cs" />
+    <Compile Include="Common\ExtensionMethods.cs" />
+    <Compile Include="Enums\ExtensionNames.cs" />
     <Compile Include="Common\ReturnSet.cs" />
     <Compile Include="Objects\VulkanDevice.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
