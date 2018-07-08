@@ -16,11 +16,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
 
-        <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding AvailableDevices}">
+        <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" ItemsSource="{Binding AvailableDevices}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -37,5 +38,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Grid.Row="2" Content="Launch" Command="{Binding LaunchRendererCommand}" Style="{StaticResource LaunchButtonStyle}" />
     </Grid>
 </Window>

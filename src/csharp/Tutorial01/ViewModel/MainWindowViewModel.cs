@@ -21,7 +21,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.Windows.Input;
 using Tutorial01.Common;
 using Tutorial01.Objects;
 
@@ -35,6 +35,15 @@ namespace Tutorial01.ViewModel
         {
             get => _availableDevices;
             set { _availableDevices = value; OnPropertyChanged(); }
+        }
+
+        private VulkanDevice _selectedDevice;
+
+        public VulkanDevice SelectedDevice
+        {
+            get => _selectedDevice;
+
+            set { _selectedDevice = value; OnPropertyChanged(); }
         }
 
         private readonly VulkanRenderer _vulkanRenderer;
@@ -56,6 +65,15 @@ namespace Tutorial01.ViewModel
             AvailableDevices = new ObservableCollection<VulkanDevice>(_vulkanRenderer.Devices);
 
             return new ReturnSet<bool>(true);
+        }
+
+        private ICommand _launchRendererCommand;
+
+        public ICommand LaunchRendererCommand => _launchRendererCommand ?? (_launchRendererCommand = new CommandHandler(LaunchRenderer));
+
+        public void LaunchRenderer()
+        {
+            _vulkanRenderer.InitializeLogicalDevice(SelectedDevice);
         }
 
         #region MVVM Boilerplate code

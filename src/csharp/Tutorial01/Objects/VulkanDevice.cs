@@ -18,17 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
+using System.Linq;
+
 using VulkanNET;
 
 namespace Tutorial01.Objects
 {
-    public class VulkanDevice
+    public class VulkanDevice : IDisposable
     {
         private PhysicalDevice _physicalDevice;
+        private Device _device;
 
         public VulkanDevice(PhysicalDevice physicalDevice)
         {
             _physicalDevice = physicalDevice;
+        }
+
+        public unsafe void CreateLogicalDevice(DeviceCreateInfo deviceCreateInfo)
+        {
+            _device = _physicalDevice.CreateDevice(ref deviceCreateInfo);
+        }
+
+        public Queue CreateQueue(Surface surface)
+        {
+            var queueNodeIndex = _physicalDevice.QueueFamilyProperties.
+                Where((properties, index) => (properties.QueueFlags & QueueFlags.Graphics) != 0 && 
+                                             _physicalDevice.GetSurfaceSupport((uint)index, surface)).
+                Select((properties, index) => index).First();
+
+            return _device.GetQueue(0, (uint)queueNodeIndex);
         }
 
         public string DeviceType
@@ -58,6 +77,11 @@ namespace Tutorial01.Objects
 
                 return _name;
             }
+        }
+
+        public unsafe void Dispose()
+        {
+            _device.Destroy();
         }
     }
 }
