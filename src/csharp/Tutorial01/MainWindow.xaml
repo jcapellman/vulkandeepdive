@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:Tutorial01.ViewModel"        
+        xmlns:viewModel="clr-namespace:Tutorial01.ViewModel"
+        xmlns:resx="clr-namespace:Tutorial01.Resx"
+        xmlns:xamlExtensions="clr-namespace:Tutorial01.XAMLExtensions"
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}">
 
@@ -35,7 +37,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
+            <Label Grid.Row="0" Content="{xamlExtensions:Loc MainWindow_AvailableDevicesLabel}" Style="{StaticResource FieldLabelStyle}"/>
 
             <Button Grid.Row="1" Content="{Binding SelectedDeviceName}" Style="{StaticResource LaunchButtonStyle}" />
         </Grid>
@@ -46,7 +48,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="Log" Style="{StaticResource FieldLabelStyle}"/>
+            <Label Grid.Row="0" Content="{xamlExtensions:Loc MainWindow_LogLabel}" Style="{StaticResource FieldLabelStyle}"/>
             <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding MessageLog, Mode=TwoWay}" />
         </Grid>
 
@@ -57,7 +59,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="1" Content="Launch" Command="{Binding LaunchRendererCommand}" IsEnabled="{Binding LaunchBtnEnabled}" Style="{StaticResource LaunchButtonStyle}" />
+            <Button Grid.Row="1" Content="{xamlExtensions:Loc MainWindow_LaunchBtnText}" Command="{Binding LaunchRendererCommand}" IsEnabled="{Binding LaunchBtnEnabled}" Style="{StaticResource LaunchButtonStyle}" />
             <Label Grid.Row="2" Content="Vulkan and the Vulkan logo are registered trademarks of the Khronos Group Inc." Style="{StaticResource FooterLabelStyle}" />
         </Grid>
     </Grid>
