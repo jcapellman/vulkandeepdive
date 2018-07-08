@@ -46,10 +46,21 @@ namespace Tutorial01.ViewModel
         {
             get => _selectedDevice;
 
-            set { _selectedDevice = value;
+            set {
+                _selectedDevice = value;
                 OnPropertyChanged();
                 LaunchBtnEnabled = value != null;
+
+                SelectedDeviceName = $"{value?.Name} ({value?.DeviceType})";
             }
+        }
+
+        private string _selectedDeviceName;
+
+        public string SelectedDeviceName
+        {
+            get => _selectedDeviceName;
+            set { _selectedDeviceName = value; OnPropertyChanged(); }
         }
 
         private bool _launchBtnEnabled;
@@ -117,7 +128,9 @@ namespace Tutorial01.ViewModel
 
             if (!AvailableDevices.Any())
             {
-                AddMessage("No Vulkan devices available");
+                AddMessage("No Vulkan devices available, verify your drivers are installed");
+
+                SelectedDeviceName = "No Vulkan Device Found";
 
                 return;
             }

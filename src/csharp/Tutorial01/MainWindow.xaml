@@ -37,7 +37,7 @@
 
             <Label Grid.Row="0" Content="Available Devices" Style="{StaticResource FieldLabelStyle}"/>
 
-            <Button Grid.Row="1" Content="{Binding SelectedDevice.Name}" Style="{StaticResource LaunchButtonStyle}" />
+            <Button Grid.Row="1" Content="{Binding SelectedDeviceName}" Style="{StaticResource LaunchButtonStyle}" />
         </Grid>
 
         <Grid Grid.Row="2" Style="{StaticResource FormGroupGridStyle}">
