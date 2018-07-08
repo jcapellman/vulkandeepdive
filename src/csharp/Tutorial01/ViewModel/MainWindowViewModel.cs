@@ -29,6 +29,7 @@ namespace Tutorial01.ViewModel
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        #region Variables
         private ObservableCollection<VulkanDevice> _availableDevices;
 
         public ObservableCollection<VulkanDevice> AvailableDevices
@@ -66,11 +67,7 @@ namespace Tutorial01.ViewModel
         {
             get => _launchBtnEnabled;
 
-            set
-            {
-                _launchBtnEnabled = value;
-                OnPropertyChanged();
-            }
+            set { _launchBtnEnabled = value; OnPropertyChanged(); }
         }
 
         public ObservableCollection<string> MessageLog
@@ -81,7 +78,9 @@ namespace Tutorial01.ViewModel
         }
 
         private readonly VulkanRenderer _vulkanRenderer;
+        #endregion
 
+        #region Main Methods
         public MainWindowViewModel()
         {
             _vulkanRenderer = new VulkanRenderer();
@@ -115,7 +114,9 @@ namespace Tutorial01.ViewModel
 
             AddLog($"{AvailableDevices.Count} Vulkan Device(s) found");
         }
+        #endregion
 
+        #region Commands
         private ICommand _launchRendererCommand;
 
         public ICommand LaunchRendererCommand => _launchRendererCommand ?? (_launchRendererCommand = new CommandHandler(LaunchRenderer));
@@ -124,5 +125,6 @@ namespace Tutorial01.ViewModel
         {
             _vulkanRenderer.InitializeLogicalDevice(SelectedDevice);
         }
+        #endregion
     }
 }
