@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using Tutorial01.Enums;
+
 namespace Tutorial01.Common
 {
     public static class ExtensionMethods

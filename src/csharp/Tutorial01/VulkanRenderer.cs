@@ -29,6 +29,7 @@ using SharpDX.Windows;
 using VulkanNET;
 
 using Tutorial01.Common;
+using Tutorial01.Enums;
 using Tutorial01.Objects;
 
 namespace Tutorial01

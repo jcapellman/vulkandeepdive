@@ -1,4 +1,4 @@
-﻿namespace Tutorial01.Common
+﻿namespace Tutorial01.Enums
 {
     public enum ExtensionNames
     {
