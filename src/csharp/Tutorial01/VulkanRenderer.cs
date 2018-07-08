@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -46,45 +45,29 @@ namespace Tutorial01
 
         public List<VulkanDevice> Devices => _instance.PhysicalDevices.Select(a => new VulkanDevice(a)).ToList();
 
-        private IntPtr[] BuildExtensionArray(params ExtensionNames[] extensionName) => extensionName.Select(a => a.ToIntPtr()).ToArray();
-
-        public unsafe ReturnSet<bool> Initialize()
+        public ReturnSet<bool> Initialize()
         {
             try
             {
-                var applicationInfo = new ApplicationInfo
+                var instanceCreationResult = VulkanInstance.Create();
+
+                if (instanceCreationResult.IsError)
                 {
-                    StructureType = StructureType.ApplicationInfo,
-                    EngineVersion = 0,                    
-                    ApiVersion = Vulkan.ApiVersion
-                };
-
-                var enabledExtensionNames =
-                    BuildExtensionArray(ExtensionNames.VK_KHR_surface, ExtensionNames.VK_KHR_win32_surface, ExtensionNames.VK_EXT_debug_report);
-
-                fixed (void* enabledExtensionNamesPointer = &enabledExtensionNames[0])
-                {
-                    var instanceCreateInfo = new InstanceCreateInfo
-                    {
-                        StructureType = StructureType.InstanceCreateInfo,
-                        ApplicationInfo = new IntPtr(&applicationInfo),
-                        EnabledExtensionCount = (uint) enabledExtensionNames.Length,
-                        EnabledExtensionNames = new IntPtr(enabledExtensionNamesPointer),
-                    };
-
-                    _instance = Vulkan.CreateInstance(ref instanceCreateInfo);
-
-                    var surfaceCreateInfo = new Win32SurfaceCreateInfo
-                    {
-                        StructureType = StructureType.Win32SurfaceCreateInfo,
-                        InstanceHandle = Process.GetCurrentProcess().Handle,
-                        WindowHandle = form.Handle,
-                    };
-
-                    _surface = _instance.CreateWin32Surface(surfaceCreateInfo);
-
-                    return new ReturnSet<bool>(true);
+                    throw instanceCreationResult.Error;
                 }
+
+                _instance = instanceCreationResult.Value;
+
+                var surfaceCreationResult = VulkanSurface.Create(_instance, form);
+
+                if (surfaceCreationResult.IsError)
+                {
+                    throw surfaceCreationResult.Error;
+                }
+
+                _surface = surfaceCreationResult.Value;
+
+                return new ReturnSet<bool>(true);                
             }
             catch (Exception ex)
             {
@@ -109,23 +92,20 @@ namespace Tutorial01
                 ShaderClipDistance = true,
             };
 
-            var enabledExtensionNames = BuildExtensionArray(ExtensionNames.VK_KHR_swapchain);
+            var enabledExtensionName = ExtensionNames.VK_KHR_swapchain.ToIntPtr();
 
-            fixed (void * enabledExtensionNamesPtr = &enabledExtensionNames[0])
+            var deviceCreateInfo = new DeviceCreateInfo
             {
-                var deviceCreateInfo = new DeviceCreateInfo
-                {
-                    StructureType = StructureType.DeviceCreateInfo,
-                    QueueCreateInfoCount = 1,
-                    QueueCreateInfos = new IntPtr(&deviceQueueCreateInfo),
-                    EnabledExtensionCount = (uint) enabledExtensionNames.Length,
-                    EnabledExtensionNames = new IntPtr(enabledExtensionNamesPtr),
-                    EnabledFeatures = new IntPtr(&physicalDeviceFeatures)
-                };
+                StructureType = StructureType.DeviceCreateInfo,
+                QueueCreateInfoCount = 1,
+                QueueCreateInfos = new IntPtr(&deviceQueueCreateInfo),
+                EnabledExtensionCount = 1,
+                EnabledExtensionNames = enabledExtensionName,
+                EnabledFeatures = new IntPtr(&physicalDeviceFeatures)
+            };
 
-                physicalDevice.CreateLogicalDevice(deviceCreateInfo);
-            }
-
+            physicalDevice.CreateLogicalDevice(deviceCreateInfo);
+           
             _queue = physicalDevice.CreateQueue(_surface);
            
             return new ReturnSet<bool>(true);

@@ -77,6 +77,8 @@
     <Compile Include="Enums\ExtensionNames.cs" />
     <Compile Include="Common\ReturnSet.cs" />
     <Compile Include="Objects\VulkanDevice.cs" />
+    <Compile Include="Objects\VulkanInstance.cs" />
+    <Compile Include="Objects\VulkanSurface.cs" />
     <Compile Include="Resx\AppResources.es.Designer.cs">
       <DependentUpon>AppResources.es.resx</DependentUpon>
       <AutoGen>True</AutoGen>
