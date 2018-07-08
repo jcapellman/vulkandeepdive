@@ -88,7 +88,7 @@ namespace Tutorial01.ViewModel
 
         public void InitializeRenderer()
         {
-            var initResult = _vulkanRenderer.Initialize();
+            var initResult = _vulkanRenderer.Initialize(logger);
 
             if (initResult.IsNullOrError)
             {
@@ -97,7 +97,7 @@ namespace Tutorial01.ViewModel
                 return;
             }
 
-            AddLog("Initialized Successfully");
+            AddLog("Initialized Completed Successfully");
 
             AvailableDevices = new ObservableCollection<VulkanDevice>(_vulkanRenderer.Devices);
 

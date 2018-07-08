@@ -35,7 +35,7 @@ namespace Tutorial01
 {
     public class VulkanRenderer : IDisposable
     {
-        private readonly Form form;
+        private readonly Form _form;
 
         private Instance _instance;
         
@@ -45,7 +45,7 @@ namespace Tutorial01
 
         public List<VulkanDevice> Devices => _instance.PhysicalDevices.Select(a => new VulkanDevice(a)).ToList();
 
-        public ReturnSet<bool> Initialize()
+        public ReturnSet<bool> Initialize(Logger logger)
         {
             try
             {
@@ -58,7 +58,9 @@ namespace Tutorial01
 
                 _instance = instanceCreationResult.Value;
 
-                var surfaceCreationResult = VulkanSurface.Create(_instance, form);
+                logger.AddMessage("Instance created successfully");
+
+                var surfaceCreationResult = VulkanSurface.Create(_instance, _form);
 
                 if (surfaceCreationResult.IsError)
                 {
@@ -66,6 +68,8 @@ namespace Tutorial01
                 }
 
                 _surface = surfaceCreationResult.Value;
+
+                logger.AddMessage("Surface created successfully");
 
                 return new ReturnSet<bool>(true);                
             }
@@ -113,7 +117,7 @@ namespace Tutorial01
 
         public VulkanRenderer()
         {
-            form = new RenderForm(Constants.TutorialName);
+            _form = new RenderForm(Constants.TutorialName);
         }
 
         private unsafe void ReleaseUnmanagedResources()
@@ -126,6 +130,8 @@ namespace Tutorial01
             }
             
             _instance.Destroy();
+
+            _form.Dispose();
         }
 
         public void Dispose()
