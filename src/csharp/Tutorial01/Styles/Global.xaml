@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:common="clr-namespace:Tutorial01.Common"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:xamlControls="clr-namespace:Tutorial01.XAMLControls">
     <SolidColorBrush x:Key="WindowBackgroundColor" Color="#1e1e1e" />
     <SolidColorBrush x:Key="WindowHighlightColor" Color="#9e9e9e" />
     <SolidColorBrush x:Key="WindowAltBackgroundColor" Color="#2e2e2e" />
@@ -42,7 +43,7 @@
         <Setter Property="Margin" Value="0,0,0,5" />
     </Style>
 
-    <Style TargetType="ListView" x:Key="ListViewStyle">
+    <Style TargetType="xamlControls:ExtendedListView" x:Key="ListViewStyle">
         <Setter Property="Background" Value="{StaticResource WindowAltBackgroundColor}" />
         <Setter Property="Foreground" Value="{StaticResource WindowTextColor}" />
         <Setter Property="Height" Value="200" />

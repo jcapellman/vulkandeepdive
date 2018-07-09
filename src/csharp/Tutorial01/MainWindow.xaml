@@ -6,6 +6,7 @@
         xmlns:viewModel="clr-namespace:Tutorial01.ViewModel"
         xmlns:resx="clr-namespace:Tutorial01.Resx"
         xmlns:xamlExtensions="clr-namespace:Tutorial01.XAMLExtensions"
+        xmlns:xamlControls="clr-namespace:Tutorial01.XAMLControls"
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}">
 
@@ -49,7 +50,7 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Content="{xamlExtensions:Loc MainWindow_LogLabel}" Style="{StaticResource FieldLabelStyle}"/>
-            <ListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding MessageLog, Mode=TwoWay}" />
+            <xamlControls:ExtendedListView Grid.Row="1" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding MessageLog, Mode=TwoWay}" />
         </Grid>
 
         <Grid Grid.Row="3" Style="{StaticResource FormGroupGridStyle}">
