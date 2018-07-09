@@ -123,7 +123,7 @@ namespace Tutorial01.ViewModel
 
         public void LaunchRenderer()
         {
-            _vulkanRenderer.InitializeLogicalDevice(SelectedDevice);
+            _vulkanRenderer.InitializeLogicalDevice(SelectedDevice, logger);
         }
         #endregion
     }

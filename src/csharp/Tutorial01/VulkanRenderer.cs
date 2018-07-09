@@ -79,7 +79,7 @@ namespace Tutorial01
             }
         }
 
-        public unsafe ReturnSet<bool> InitializeLogicalDevice(VulkanDevice physicalDevice)
+        public unsafe ReturnSet<bool> InitializeLogicalDevice(VulkanDevice physicalDevice, Logger logger)
         {
             uint queuePriorities = 0;
 
@@ -123,7 +123,11 @@ namespace Tutorial01
                 
                 physicalDevice.CreateLogicalDevice(deviceCreateInfo);
 
+                logger.AddMessage("Logical Device created successfully");
+
                 _queue = physicalDevice.CreateQueue(_surface);
+
+                logger.AddMessage($"Queue created on {physicalDevice.Name}");
 
                 return new ReturnSet<bool>(true);
             }
