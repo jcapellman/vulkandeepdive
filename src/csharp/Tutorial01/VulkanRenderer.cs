@@ -96,23 +96,37 @@ namespace Tutorial01
                 ShaderClipDistance = true,
             };
 
-            var enabledExtensionName = ExtensionNames.VK_KHR_swapchain.ToIntPtr();
-
-            var deviceCreateInfo = new DeviceCreateInfo
+            var enabledLayerNames = new[]
             {
-                StructureType = StructureType.DeviceCreateInfo,
-                QueueCreateInfoCount = 1,
-                QueueCreateInfos = new IntPtr(&deviceQueueCreateInfo),
-                EnabledExtensionCount = 1,
-                EnabledExtensionNames = enabledExtensionName,
-                EnabledFeatures = new IntPtr(&physicalDeviceFeatures)
+                ExtensionNames.VK_LAYER_LUNARG_standard_validation.ToIntPtr()
             };
 
-            physicalDevice.CreateLogicalDevice(deviceCreateInfo);
-           
-            _queue = physicalDevice.CreateQueue(_surface);
-           
-            return new ReturnSet<bool>(true);
+            var enabledExtensionNames = new[]
+            {
+                ExtensionNames.VK_KHR_swapchain.ToIntPtr()
+            };
+
+            fixed (void* enabledLayerNamesPointer = &enabledLayerNames[0])
+            fixed (void* enabledExtensionNamesPointer = &enabledExtensionNames[0])
+            {
+                var deviceCreateInfo = new DeviceCreateInfo
+                {
+                    StructureType = StructureType.DeviceCreateInfo,
+                    QueueCreateInfoCount = 1,
+                    QueueCreateInfos = new IntPtr(&deviceQueueCreateInfo),
+                    EnabledExtensionCount = (uint) enabledExtensionNames.Length,
+                    EnabledExtensionNames = new IntPtr(enabledExtensionNamesPointer),
+                    EnabledFeatures = new IntPtr(&physicalDeviceFeatures),
+                    EnabledLayerCount = (uint) enabledLayerNames.Length,
+                    EnabledLayerNames = new IntPtr(enabledLayerNamesPointer)
+                };
+                
+                physicalDevice.CreateLogicalDevice(deviceCreateInfo);
+
+                _queue = physicalDevice.CreateQueue(_surface);
+
+                return new ReturnSet<bool>(true);
+            }
         }
 
         public VulkanRenderer()

@@ -25,6 +25,7 @@ namespace Tutorial01.Enums
         VK_KHR_surface,
         VK_KHR_win32_surface,
         VK_EXT_debug_report,
-        VK_KHR_swapchain        
+        VK_KHR_swapchain,
+        VK_LAYER_LUNARG_standard_validation
     }
 }
