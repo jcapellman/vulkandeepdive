@@ -129,6 +129,8 @@ namespace Tutorial01
 
                 logger.AddMessage($"Queue created on {physicalDevice.Name}");
 
+                _form.Show();
+
                 return new ReturnSet<bool>(true);
             }
         }
